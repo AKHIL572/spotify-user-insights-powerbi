@@ -67,37 +67,114 @@ Total Playlists Created = SUM('Table1'[playlists_created])
 ## 📊 Dashboard Pages
 
 ### Page 1 — Spotify User Growth & Executive Overview
-High-level summary of platform performance with KPIs, signup trend, subscription mix, and country distribution.
+High-level summary of overall platform performance — user growth, subscription mix, engagement, and geographic distribution.
 
-**Key Charts:** User Signup Trend (Line) · Subscription Plan Distribution (Donut) · Active vs Inactive by Subscription Type (Stacked Column) · Avg Listening Hours by Age Group (Column) · Top Countries by User Count (Bar)
+**Business Questions Answered:**
+- How has the user base grown over the years?
+- What is the current subscription plan breakdown?
+- How many users are active vs inactive across subscription types?
+- Which age groups listen the most on average?
+- Which countries have the highest user count?
+
+**KPIs:** Total Users · Active Users · Churn Rate % · Avg Weekly Listening Hours · Ad Conversion Rate %
+
+**Charts:**
+1. User Signup Trend Over Time — Line Chart (Year/Month)
+2. Subscription Plan Distribution — Donut Chart
+3. Active vs Inactive Users by Subscription Type — Stacked Column Chart
+4. Average Listening Hours by Age Group — Clustered Column Chart
+5. Top Countries by User Count — Clustered Bar Chart
 
 ---
 
 ### Page 2 — Customer Churn & Retention Analysis
 Deep dive into inactivity patterns across age groups, subscription types, countries, and genres.
 
-**Key Charts:** Churn Rate by Age Group (Bar) · Churn Rate by Subscription Type (Column) · Churn Rate by Country (Bar) · Inactive Users by Months Inactive (Column) · Active vs Inactive by Age Group (100% Stacked Bar) · Inactive Users by Genre (Treemap)
+**Business Questions Answered:**
+- Which age group churns the most?
+- Which age group is the most active?
+- Which countries have the highest inactivity rates?
+- Which genres are associated with higher churn?
+- How long do users stay inactive before churning?
+- What is the Active vs Inactive split across age groups?
+
+**KPIs:** Total Users · Inactive Users · Churn Rate % · Avg Months Inactive · Retention Rate %
+
+**Charts:**
+1. Churn Rate by Age Group — Clustered Bar Chart
+2. Churn Rate by Subscription Type — Clustered Column Chart
+3. Churn Rate by Country — Clustered Bar Chart (Top 8)
+4. Inactive Users by Months Inactive — Clustered Column Chart
+5. Active vs Inactive Users by Age Group — 100% Stacked Bar Chart
+6. Inactive Users by Favorite Genre — Treemap
 
 ---
 
 ### Page 3 — Subscription & Conversion Analysis
-Examines premium adoption rates, ad conversion performance, and the subscription conversion funnel.
+Examines premium adoption rates, ad conversion performance, and the full subscription conversion funnel.
 
-**Key Charts:** Subscription Plan Distribution (Donut) · Premium Adoption by Age Group (Column) · Users by Subscription Type (100% Stacked Column) · Ad Conversion Rate by Age Group (Bar) · Premium Adoption by Country (Bar) · Subscription Conversion Funnel
+**Business Questions Answered:**
+- Do users who interact with ads convert more to premium?
+- Which age groups convert best from free to premium?
+- Which device type drives the most subscriptions?
+- Which countries have the highest premium adoption rate?
+- What does the full conversion funnel look like from total users to paid subscribers?
+
+**KPIs:** Total Subscribers · Premium Users · Free Users · Premium Adoption Rate % · Ad Conversion Rate %
+
+**Charts:**
+1. Subscription Plan Distribution — Donut Chart
+2. Premium Adoption by Age Group — Clustered Column Chart
+3. Users by Subscription Type (Active vs Inactive) — 100% Stacked Column Chart
+4. Ad Conversion Rate by Age Group — Clustered Bar Chart
+5. Premium Adoption Rate by Country — Clustered Bar Chart (Top 8)
+6. Subscription Conversion Funnel — Funnel Chart (Total Users → Ad Interaction Users → Converted Users)
 
 ---
 
 ### Page 4 — User Engagement & Listening Behavior
-Explores listening habits, skip behavior, playlist creation patterns, and recommendation ratings.
+Explores listening habits, skip behavior, playlist creation patterns, and music recommendation satisfaction.
 
-**Key Charts:** Avg Listening Hours by Age Group (Column) · Avg Listening Hours by Subscription Type (Bar) · Avg Daily Skips by Genre (Column) · Playlist Creator Category Distribution (Column) · Listening Hours vs Playlist Creation (Scatter) · Avg Recommendation Rating by Genre (Bar)
+**Business Questions Answered:**
+- Which genre users listen the most on average?
+- Do playlist creators spend more time listening?
+- Which age groups skip music the most?
+- How does listening behavior differ across subscription types?
+- Is there a relationship between listening hours and playlist creation?
+- Which genres receive the best recommendation ratings?
+
+**KPIs:** Avg Weekly Listening Hours · Avg Daily Skips · Total Playlists Created · Avg Playlists Per User · Avg Recommendation Rating
+
+**Charts:**
+1. Average Listening Hours by Age Group — Clustered Column Chart
+2. Average Listening Hours by Subscription Type — Clustered Bar Chart
+3. Average Daily Skips by Favorite Genre — Clustered Column Chart
+4. Playlist Creator Category Distribution — Clustered Column Chart
+5. Listening Hours vs Playlist Creation — Scatter Chart (by Subscription Type)
+6. Average Recommendation Rating by Genre — Clustered Bar Chart (Top 8)
 
 ---
 
 ### Page 5 — Product Features & Recommendation
-Uncovers genre preferences, most loved features, desired future features, and recommendation satisfaction.
+Uncovers genre preferences, most loved current features, desired future features, and recommendation satisfaction by segment.
 
-**Key Charts:** Top Favorite Music Genres (Bar) · Avg Recommendation Rating by Genre (Column) · Most Used Spotify Features (Donut) · Desired Future Features (Treemap) · Feature Preference by Subscription Type (Stacked Bar) · Recommendation Rating by Age Group (100% Stacked Column)
+**Business Questions Answered:**
+- What do users currently love most about Spotify?
+- What should Spotify build or prioritize next?
+- Which genre users are happiest with music recommendations?
+- Are premium users more satisfied with recommendations than free users?
+- How does feature preference vary across subscription types?
+- How are recommendation ratings distributed across age groups?
+
+**KPIs:** Avg Recommendation Rating · Total Genres · Most Popular Genre · Total Feature Requests · Total Feature Preferences
+
+**Charts:**
+1. Top Favorite Music Genres — Clustered Bar Chart (Top 8)
+2. Average Recommendation Rating by Genre — Clustered Column Chart
+3. Most Used Spotify Features — Donut Chart
+4. Desired Future Features — Treemap
+5. Feature Preference by Subscription Type — Stacked Bar Chart
+6. Recommendation Rating by Age Group and Genre — 100% Stacked Column Chart
 
 ---
 
