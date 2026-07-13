@@ -1,232 +1,345 @@
-# 🎵 Spotify User Insights Dashboard
+# 🎵 Spotify User Behavior Analysis | End-to-End Data Analytics Project
 
-> End-to-end Spotify user analytics dashboard built with Excel and Power BI — analyzing churn, subscription conversion, engagement, and product insights across 50K users.
+## Project Overview
 
----
+This project is an end-to-end data analytics portfolio project that simulates the workflow of a Product or Growth Analyst working with a large-scale Spotify user dataset.
 
-## 📌 Project Overview
+Starting from a raw dataset containing intentional data quality issues, the project demonstrates the complete analytics lifecycle:
 
-This project analyzes a Spotify user dataset of 50,000 users to uncover patterns in user behavior, subscription conversion, churn, engagement, and product feature preferences. The analysis was performed in **Microsoft Excel** for initial exploration and **Power BI** for interactive dashboard creation.
+- Data Quality Assessment
+- Data Cleaning & Validation
+- Feature Engineering
+- Statistical Analysis
+- Business Question Analysis
+- Excel Pivot Table Reporting
+- Interactive Power BI Dashboard Development
 
-The dashboard is designed to answer real business questions:
-- Who is churning and why?
-- How effectively are ads converting free users to premium?
-- Which age groups and countries drive the most engagement?
-- What features do users love and what do they want next?
+The objective is to transform raw user behavior data into actionable business insights related to user engagement, customer retention, subscription conversion, and product usage.
 
----
-
-## 🗂️ Dataset
-
-| Property | Details |
-|---|---|
-| Total Records | 50,000 users |
-| Source | Synthetic Spotify-style user dataset |
-| Format | Excel (.xlsx) |
-
-### Original Columns
-`user_id`, `country`, `age`, `signup_date`, `subscription_type`, `subscription_status`, `months_inactive`, `inactive_3_months_flag`, `ad_interaction`, `ad_conversion_to_subscription`, `music_suggestion_rating_1_to_5`, `avg_listening_hours_per_week`, `favorite_genre`, `most_liked_feature`, `desired_future_feature`, `primary_device`, `playlists_created`, `avg_skips_per_day`
-
-### Helper Columns Added in Excel
-| Column | Description |
-|---|---|
-| `Age Group` | Bucketed age into Gen Z, Young Adults, Mid-Career, Mature Adults, Seniors |
-| `Month` | Extracted month number from signup_date |
-| `Year` | Extracted year from signup_date |
-| `Listening Hour Category` | Binned avg_listening_hours_per_week into Low / Medium / High / Very High |
-| `Playlist Creator Category` | Binned playlists_created into Casual / Active / Power User |
+> **Note:** This is a self-directed portfolio project built using a synthetically generated Spotify-style dataset. The business scenario, stakeholder objectives, and recommendations simulate a real-world analytics environment.
 
 ---
 
-## 🛠️ Tools Used
+# Dataset Overview
 
-- **Microsoft Excel** — Data exploration, pivot tables, helper column creation
-- **Power BI Desktop** — Interactive dashboard, DAX measures, DAX columns
-- **DAX (Data Analysis Expressions)** — Custom KPI measures
-
----
-
-## 📐 DAX Measures
-
-```dax
-Total Users = COUNT('Table1'[user_id])
-Inactive Users = CALCULATE(COUNT('Table1'[user_id]), 'Table1'[inactive_3_months_flag] = 1)
-Churn Rate % = DIVIDE([Inactive Users], [Total Users], 0)
-Retention Rate % = 1 - [Churn Rate %]
-Ad Interaction Users = CALCULATE(COUNT('Table1'[user_id]), 'Table1'[ad_interaction] = "Yes")
-Converted Users = CALCULATE(COUNT('Table1'[user_id]), 'Table1'[ad_conversion_to_subscription] = "Yes")
-Ad Conversion Rate % = DIVIDE([Converted Users], [Total Users], 0)
-Free Users = CALCULATE(COUNT('Table1'[user_id]), 'Table1'[subscription_type] = "Free")
-Premium Users = CALCULATE(COUNT('Table1'[user_id]), 'Table1'[subscription_type] <> "Free")
-Premium Adoption Rate % = DIVIDE([Premium Users], [Total Users], 0)
-Total Playlists Created = SUM('Table1'[playlists_created])
-```
+| Attribute | Value |
+|-----------|-------|
+| Dataset Type | Synthetic Spotify User Dataset |
+| Total Records | 50,050 |
+| Original Features | 18 |
+| Cleaned Records | 50,020 |
+| Missing Values | Present in 4 columns |
+| Duplicate Records Removed | 30 |
+| Dashboard Pages | 5 |
+| Excel Worksheets | 9 |
 
 ---
 
-## 📊 Dashboard Pages
+# Business Objectives
 
-### Page 1 — Spotify User Growth & Executive Overview
-High-level summary of overall platform performance — user growth, subscription mix, engagement, and geographic distribution.
+The project answers several business questions commonly investigated by Product Analytics and Growth teams.
 
-**Business Questions Answered:**
-- How has the user base grown over the years?
-- What is the current subscription plan breakdown?
-- How many users are active vs inactive across subscription types?
-- Which age groups listen the most on average?
-- Which countries have the highest user count?
-
-**KPIs:** Total Users · Active Users · Churn Rate % · Avg Weekly Listening Hours · Ad Conversion Rate %
-
-**Charts:**
-1. User Signup Trend Over Time — Line Chart (Year/Month)
-2. Subscription Plan Distribution — Donut Chart
-3. Active vs Inactive Users by Subscription Type — Stacked Column Chart
-4. Average Listening Hours by Age Group — Clustered Column Chart
-5. Top Countries by User Count — Clustered Bar Chart
+- Which customer segments experience the highest churn?
+- How effective are Spotify advertisements at converting Free users to Premium?
+- Which subscription plans have the highest adoption?
+- How does user engagement vary across demographics?
+- Which music genres receive the highest recommendation ratings?
+- Which Spotify features are most valued by users?
+- What future features are users requesting?
+- Which customer behaviors should product teams prioritize?
 
 ---
 
-### Page 2 — Customer Churn & Retention Analysis
-Deep dive into inactivity patterns across age groups, subscription types, countries, and genres.
+# Project Workflow
 
-**Business Questions Answered:**
-- Which age group churns the most?
-- Which age group is the most active?
-- Which countries have the highest inactivity rates?
-- Which genres are associated with higher churn?
-- How long do users stay inactive before churning?
-- What is the Active vs Inactive split across age groups?
+## 1. Data Quality Assessment
 
-**KPIs:** Total Users · Inactive Users · Churn Rate % · Avg Months Inactive · Retention Rate %
+The raw dataset was profiled before any cleaning was performed.
 
-**Charts:**
-1. Churn Rate by Age Group — Clustered Bar Chart
-2. Churn Rate by Subscription Type — Clustered Column Chart
-3. Churn Rate by Country — Clustered Bar Chart (Top 8)
-4. Inactive Users by Months Inactive — Clustered Column Chart
-5. Active vs Inactive Users by Age Group — 100% Stacked Bar Chart
-6. Inactive Users by Favorite Genre — Treemap
+The assessment included:
+
+- Missing value analysis
+- Duplicate detection
+- Invalid value identification
+- Inconsistent categorical values
+- Timeline validation
+- Outlier detection
+- Statistical summary
 
 ---
 
-### Page 3 — Subscription & Conversion Analysis
-Examines premium adoption rates, ad conversion performance, and the full subscription conversion funnel.
+## 2. Data Cleaning
 
-**Business Questions Answered:**
-- Do users who interact with ads convert more to premium?
-- Which age groups convert best from free to premium?
-- Which device type drives the most subscriptions?
-- Which countries have the highest premium adoption rate?
-- What does the full conversion funnel look like from total users to paid subscribers?
+Each quality issue was addressed individually using documented business reasoning rather than blanket replacement rules.
 
-**KPIs:** Total Subscribers · Premium Users · Free Users · Premium Adoption Rate % · Ad Conversion Rate %
+Cleaning activities included:
 
-**Charts:**
-1. Subscription Plan Distribution — Donut Chart
-2. Premium Adoption by Age Group — Clustered Column Chart
-3. Users by Subscription Type (Active vs Inactive) — 100% Stacked Column Chart
-4. Ad Conversion Rate by Age Group — Clustered Bar Chart
-5. Premium Adoption Rate by Country — Clustered Bar Chart (Top 8)
-6. Subscription Conversion Funnel — Funnel Chart (Total Users → Ad Interaction Users → Converted Users)
+- Removing duplicate records
+- Standardizing categorical values
+- Handling missing values
+- Preserving meaningful null values
+- Correcting inconsistent text formatting
+- Flagging invalid dates
+- Identifying outliers
+- Creating data quality indicator columns
 
 ---
 
-### Page 4 — User Engagement & Listening Behavior
-Explores listening habits, skip behavior, playlist creation patterns, and music recommendation satisfaction.
+## 3. Feature Engineering
 
-**Business Questions Answered:**
-- Which genre users listen the most on average?
-- Do playlist creators spend more time listening?
-- Which age groups skip music the most?
-- How does listening behavior differ across subscription types?
-- Is there a relationship between listening hours and playlist creation?
-- Which genres receive the best recommendation ratings?
+Additional analytical columns were created to improve reporting and segmentation.
 
-**KPIs:** Avg Weekly Listening Hours · Avg Daily Skips · Total Playlists Created · Avg Playlists Per User · Avg Recommendation Rating
+Examples include:
 
-**Charts:**
-1. Average Listening Hours by Age Group — Clustered Column Chart
-2. Average Listening Hours by Subscription Type — Clustered Bar Chart
-3. Average Daily Skips by Favorite Genre — Clustered Column Chart
-4. Playlist Creator Category Distribution — Clustered Column Chart
-5. Listening Hours vs Playlist Creation — Scatter Chart (by Subscription Type)
-6. Average Recommendation Rating by Genre — Clustered Bar Chart (Top 8)
+- Age Group
+- Playlist Creator Category
+- Premium User Flag
+- Churn Flag
+- Conversion Flag
+- Missing Rating Flag
+- Invalid Signup Flag
+- Outlier Flags
 
 ---
 
-### Page 5 — Product Features & Recommendation
-Uncovers genre preferences, most loved current features, desired future features, and recommendation satisfaction by segment.
+## 4. Statistical Validation
 
-**Business Questions Answered:**
-- What do users currently love most about Spotify?
-- What should Spotify build or prioritize next?
-- Which genre users are happiest with music recommendations?
-- Are premium users more satisfied with recommendations than free users?
-- How does feature preference vary across subscription types?
-- How are recommendation ratings distributed across age groups?
+Rather than relying solely on visual observations, statistical hypothesis testing was performed to validate business findings.
 
-**KPIs:** Avg Recommendation Rating · Total Genres · Most Popular Genre · Total Feature Requests · Total Feature Preferences
+Tests performed:
 
-**Charts:**
-1. Top Favorite Music Genres — Clustered Bar Chart (Top 8)
-2. Average Recommendation Rating by Genre — Clustered Column Chart
-3. Most Used Spotify Features — Donut Chart
-4. Desired Future Features — Treemap
-5. Feature Preference by Subscription Type — Stacked Bar Chart
-6. Recommendation Rating by Age Group and Genre — 100% Stacked Column Chart
+- Chi-Square Test
+- One-Way ANOVA
+
+Significance Level:
+
+- α = 0.05
+
+Several apparent differences observed in visualizations were tested and found **not statistically significant**, ensuring conclusions were supported by evidence rather than assumptions.
 
 ---
 
-## 🔍 Key Insights
+## 5. Business Analysis
 
-- **22.25% of users** were inactive for 3+ months, with Mid-Career users showing the highest inactivity rate
-- **55% premium adoption rate** — Mature Adults lead slightly at 55.23%
-- **Ad conversion is 8.7% platform-wide**, but jumps to ~25% among users who actually interacted with an ad — indicating ad engagement quality matters more than volume
-- **Listening hours and skip rates are nearly uniform** across all subscription types (~10 hrs/week, ~10 skips/day), suggesting these behaviors aren't tied to plan tier
-- **Mood-based Auto Playlists** is the most desired future feature (8.42K users), followed by Concert Alerts and Social Listening
-- **K-Pop and Indie fans** rate music recommendations highest (3.67/5), while Latin fans rate them lowest (3.63/5)
-- **Classical** is the most popular genre overall, with nearly even distribution across all 12 genres
+Business questions were answered using:
+
+- Excel Pivot Tables
+- KPI calculations
+- Comparative analysis
+- Executive summaries
+- Business recommendations
 
 ---
 
-## 📁 Repository Structure
+## 6. Dashboard Development
 
-```
-spotify-user-insights-powerbi/
+The cleaned dataset was imported into Power BI to develop a multi-page interactive dashboard.
+
+Dashboard Pages:
+
+1. Executive Overview
+2. Churn & Retention Analysis
+3. Subscription & Conversion Analysis
+4. User Engagement Analysis
+5. Product Insights & Recommendations
+
+---
+
+# Tools & Technologies
+
+| Tool | Purpose |
+|------|----------|
+| Python | Data Cleaning, Feature Engineering, Statistical Analysis |
+| Pandas | Data Manipulation |
+| NumPy | Numerical Operations |
+| SciPy | Statistical Testing |
+| Jupyter Notebook | Cleaning Documentation |
+| Microsoft Excel | Pivot Tables, KPI Analysis, Business Reporting |
+| Power BI | Interactive Dashboard Development |
+| Git & GitHub | Version Control & Portfolio |
+
+---
+
+# Repository Structure
+
+```text
+spotify-user-behavior-analysis/
 │
 ├── data/
-│   └── spotify_user_behavior_realistic_50000_rows        # Original dataset
+│   ├── raw_spotify_dataset.csv
+│   └── cleaned_spotify_dataset.csv
+│
+├── notebooks/
+│   └── 01_data_cleaning.ipynb
 │
 ├── excel/
-│   └── spotify_dataset        # Clean dataset with pivot tables wiith helper columns
+│   └── spotify_analysis.xlsx
 │
 ├── dashboard/
-│   └── Spotify_Analysis.pbix       # Power BI dashboard file
-│   └── Spotify_Analysis.pdf        # Exported PDF of all 5 dashboard pages
+│   ├── Spotify Analysis.pbix
+│   └── Spotify Analysis.pdf
 │
-└── README.md
+├── screenshots/
+│   ├── page1_executive_overview.png
+│   ├── page2_churn_retention.png
+│   ├── page3_subscription_conversion.png
+│   ├── page4_user_engagement.png
+│   └── page5_product_insights.png
+│
+├── README.md
+└── LICENSE
 ```
 
 ---
 
-## 🚀 How to Use
+# Key Findings
 
-1. Clone this repository
-2. Open `data/spotify_dataset.xlsx` to explore the raw data and pivot tables
-3. Open `dashboard/Spotify_Analysis.pbix` in **Power BI Desktop**
-4. Use the slicers (Country, Age Group, Subscription Type, Favorite Genre, Year) to filter the dashboard interactively
-5. Navigate between pages using the sidebar buttons
-
----
-
-## 👤 Author
-
-**Your Name**
-[LinkedIn](www.linkedin.com/in/akhil-t-v) · [GitHub](https://github.com/AKHIL572)) · [Portfolio](https://akhil-tv-portfolio.vercel.app/)
+- Approximately **22%** of users are inactive, indicating a retention opportunity.
+- Premium users account for approximately **55%** of the user base, while the Free plan remains the largest individual subscription tier.
+- Advertisement-to-subscription conversion remains below **10%**, suggesting room for optimization.
+- User engagement metrics remain relatively consistent across age groups, subscription plans, and listening preferences.
+- Nearly **40%** of users did not provide feature requests, meaning product feedback represents only participating users.
+- Recommendation ratings remain relatively stable across music genres, indicating generally consistent recommendation performance.
 
 ---
 
-## 📄 License
+# Dashboard KPIs
 
-This project is open source and available under the [MIT License](LICENSE).
+The dashboard monitors:
+
+- Total Users
+- Active Users
+- Inactive Users
+- Churn Rate
+- Retention Rate
+- Premium Adoption Rate
+- Advertisement Conversion Rate
+- Average Weekly Listening Hours
+- Average Recommendation Rating
+- Average Daily Skips
+- Average Playlists Created
+
+---
+
+# Data Quality Summary
+
+The raw dataset intentionally contained multiple quality issues commonly encountered in production environments.
+
+Examples include:
+
+- Missing values
+- Duplicate records
+- Invalid ages
+- Negative listening hours
+- Negative playlist counts
+- Inconsistent country names
+- Inconsistent device names
+- Future signup dates
+- Extreme outliers
+
+Each issue was documented and resolved through a transparent cleaning process before analysis.
+
+---
+
+# Project Deliverables
+
+- Cleaned analytical dataset
+- Data cleaning notebook
+- Data quality documentation
+- Feature engineering workflow
+- Excel business analysis workbook
+- Executive summary
+- KPI definitions
+- Pivot table analysis
+- Power BI dashboard
+- Business recommendations
+
+---
+
+# Limitations
+
+- Dataset is synthetically generated and does not represent real Spotify users.
+- Statistical findings demonstrate analytical methodology rather than actual business performance.
+- Missing recommendation ratings and demographic information were intentionally preserved where imputation would introduce unsupported assumptions.
+- Product feedback analysis represents only users who voluntarily submitted responses.
+
+---
+
+# How to Reproduce
+
+1. Clone the repository.
+
+```bash
+git clone https://github.com/AKHIL572/spotify-user-insights-powerbi
+```
+
+2. Open the Jupyter Notebook.
+
+```
+01_data_cleaning.ipynb
+```
+
+3. Run all notebook cells to regenerate the cleaned dataset.
+
+4. Open the Excel workbook.
+
+```
+spotify_analysis.xlsx
+```
+
+5. Open the Power BI dashboard.
+
+```
+Spotify Analysis.pbix
+```
+
+---
+
+# Dashboard Preview
+
+## Executive Overview
+
+![Executive Overview](screenshots/page1_executive_overview.png)
+
+---
+
+## Churn & Retention Analysis
+
+![Churn & Retention](screenshots/page2_churn_retention.png)
+
+---
+
+## Subscription & Conversion Analysis
+
+![Subscription & Conversion](screenshots/page3_subscription_conversion.png)
+
+---
+
+## User Engagement Analysis
+
+![User Engagement](screenshots/page4_engagement.png)
+
+---
+
+## Product Insights
+
+![Product Insights](screenshots/page5_product_insights.png)
+
+---
+
+## Author
+
+**Akhil T V**
+
+Aspiring Data Analyst
+
+Skills demonstrated in this project:
+
+- Data Cleaning
+- Exploratory Data Analysis
+- Feature Engineering
+- Statistical Analysis
+- Business Intelligence
+- Excel Analytics
+- Power BI Dashboard Development
+- Business Storytelling
